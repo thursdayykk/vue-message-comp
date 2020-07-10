@@ -1,19 +1,18 @@
 <template>
   <div clsas="messages">
-    <div class="message-item" v-for="(message,index) in messages" :key="index">
-      <SystemText>{{toTime(message[timeKey])}}</SystemText>
-      <div class="content">
-        <template v-if="message[systemMessageKey]">
-          <SystemMessage>{{message[systemMessageKey]}}</SystemMessage>
-        </template>
-        <template v-else-if="message[imageMessageKey]">
-          <ImageMessage :avatar="message[avatarKey]" :imgUrl="message[imageMessageKey]" :side="curUserId === message[userIdKey] ? 'right':'left'"/>
-        </template>
-        <template v-else-if="message[textMessageKey]">
-          <TextMessage :side="curUserId === message[userIdKey] ? 'right':'left'" :avatar="message[avatarKey]">{{message[textMessageKey]}}</TextMessage>
-        </template>
-      </div>
-    </div>
+    <MessageWrapper v-for="(message,index) in messages" :key="index">
+      <span slot="time">{{toTime(message[timeKey])}}</span>
+      <template v-if="message[systemMessageKey]">
+        <SystemMessage>{{message[systemMessageKey]}}</SystemMessage>
+      </template>
+      <template v-else-if="message[imageMessageKey]">
+        <ImageMessage :avatar="message[avatarKey]" :imgUrl="message[imageMessageKey]" :side="curUserId === message[userIdKey] ? 'right':'left'"/>
+      </template>
+      <template v-else-if="message[textMessageKey]">
+        <TextMessage :side="curUserId === message[userIdKey] ? 'right':'left'" :avatar="message[avatarKey]">{{message[textMessageKey]}}</TextMessage>
+      </template>
+      <!-- 后续添加消息类型可在这里添加 -->
+    </MessageWrapper>
   </div>
 
 </template>
@@ -21,9 +20,9 @@
 <script>
 import ImageMessage from "./components/ImageMessage"
 import TextMessage from "./components/TextMessage"
-import SystemText from "./components/common/SystemText"
 import SystemMessage from "./components/SystemMessage"
 import {simpleDate} from "../../utils/dateFormat"
+import MessageWrapper from "../Message/components/common/MessageWrapper"
 export default {
   props:{
     messages:{
@@ -59,15 +58,11 @@ export default {
       required:true
     },
   },
-  data(){
-    return{
-    }
-  },
   components:{
     ImageMessage,
-    SystemText,
     SystemMessage,
-    TextMessage 
+    TextMessage ,
+    MessageWrapper
   },
   methods:{
     toTime(time){
