@@ -15,8 +15,8 @@ export default  [
     username: 'hxq',
     avatarSrc: 'http://img.qqzhi.com/uploads/2019-02-08/222153435.jpg',
     imageMessage: '',
-    textMessage: '哈哈哈哈哈哈',
-    systemMessage: '',
+    textMessage: '',
+    systemMessage: '你 撤回了一条信息',
 
   },
   {

@@ -18,11 +18,9 @@
 </template>
 
 <script>
-import ImageMessage from "./components/ImageMessage"
-import TextMessage from "./components/TextMessage"
-import SystemMessage from "./components/SystemMessage"
+import {ImageMessage,TextMessage,SystemMessage} from "./components/index"
 import {simpleDate} from "../../utils/dateFormat"
-import MessageWrapper from "../Message/components/common/MessageWrapper"
+import MessageWrapper from "./components/common/MessageWrapper"
 export default {
   props:{
     messages:{
